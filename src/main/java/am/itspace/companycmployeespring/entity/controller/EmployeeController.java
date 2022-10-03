@@ -1,4 +1,4 @@
-package am.itspace.companycmployeespring.controller;
+package am.itspace.companycmployeespring.entity.controller;
 
 import am.itspace.companycmployeespring.entity.Company;
 import am.itspace.companycmployeespring.entity.Employee;
@@ -30,11 +30,16 @@ public class EmployeeController {
     @Value("${company.employee.spring.images.folder}")
     private String folderPath;
 
-
+//
+//    @GetMapping("/employees")
+//    public String employeePage(ModelMap modelMap) {
+//        modelMap.addAttribute("employee", employeeRepository.findAll());
+//        return "employees";
+//    }
     @GetMapping("/employee")
-    public String employee(ModelMap modelMap) {
+    public String employeePage(ModelMap modelMap) {
         List<Employee> employees = employeeRepository.findAll();
-        modelMap.addAttribute("employees", employees);
+        modelMap.addAttribute("employee", employees);
         return "employees";
     }
 
@@ -65,11 +70,11 @@ public class EmployeeController {
         Employee employee = employeeRepository.findById(id).get();
         employee.getCompany().setSize(employee.getCompany().getSize() - 1);
         employeeRepository.deleteById(id);
-        return "redirect:/employee";
+        return "redirect:/employees";
     }
 
 
-    @GetMapping(value = "/employees/getImage", produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(value = "/employee/getImage", produces = MediaType.IMAGE_JPEG_VALUE)
     public @ResponseBody byte[] getImage(@RequestParam("fileName") String fileName) throws IOException {
         InputStream inputStream = new FileInputStream(folderPath + File.separator + fileName);
         return IOUtils.toByteArray(inputStream);

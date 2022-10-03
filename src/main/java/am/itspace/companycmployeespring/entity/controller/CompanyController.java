@@ -1,5 +1,4 @@
-package am.itspace.companycmployeespring.controller;
-
+package am.itspace.companycmployeespring.entity.controller;
 import am.itspace.companycmployeespring.entity.Company;
 import am.itspace.companycmployeespring.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;

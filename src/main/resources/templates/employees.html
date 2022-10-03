@@ -19,7 +19,8 @@
         <th>profile_pic</th>
         <th>action</th>
     </tr>
-    <tr th:each="employee:${employees}">
+    <tr th:each= "employee:${employees}">
+
         <td th:text="${employee.id}"></td>
         <td th:text="${employee.name}"></td>
         <td th:text="${employee.surname}"></td>
@@ -27,7 +28,7 @@
         <td th:text="${employee.getPhoneNumber()}"></td>
         <td th:text="${employee.salary}"></td>
         <td th:text="${employee.position}"></td>
-        <td th:text="${employee.getCompany().getName()}"></td>
+        <td></td>
         <td >
             <img style="width: 50px; height: 50px" th:if="${employee.profilePic != null}"
                  th:src="@{/employees/getImage(fileName=${employee.profilePic})}">

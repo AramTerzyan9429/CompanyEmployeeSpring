@@ -1,4 +1,4 @@
-package am.itspace.companycmployeespring.controller;
+package am.itspace.companycmployeespring.entity.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
