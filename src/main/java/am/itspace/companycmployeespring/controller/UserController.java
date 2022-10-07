@@ -1,21 +1,26 @@
-package am.itspace.companycmployeespring.entity.controller;
+package am.itspace.companycmployeespring.controller;
 
+import am.itspace.companycmployeespring.dto.CreateUserDto;
 import am.itspace.companycmployeespring.entity.User;
+import am.itspace.companycmployeespring.mapper.UserMapper;
 import am.itspace.companycmployeespring.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
+
+    @GetMapping("/user")
+    public String userPage(){
+        return "user";
+    }
 
     @GetMapping("/users")
     public String user(ModelMap modelMap) {
@@ -24,17 +29,25 @@ public class UserController {
         return "users";
     }
 
+
     @GetMapping("/users/add")
     public String addUser() {
         return "addUser";
     }
 
+
+
     @PostMapping("/users/add")
-    public String add(@ModelAttribute User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return "redirect:/users";
+    public String add(@ModelAttribute CreateUserDto dto, ModelMap modelMap) {
+        if (userRepository.existsByEmailIgnoreCase(dto.getEmail())) {
+            modelMap.addAttribute("errorMassage", "Email already is user");
+            return "addUser";
+        }
+        userRepository.save(userMapper.mapToEntity(dto));
+        return "redirect:/user";
     }
+
+
 
     @GetMapping("/users/delete")
     public String deleteUser(@RequestParam("id") int id) {

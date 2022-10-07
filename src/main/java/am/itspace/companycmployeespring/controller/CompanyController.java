@@ -1,6 +1,7 @@
-package am.itspace.companycmployeespring.entity.controller;
+package am.itspace.companycmployeespring.controller;
 import am.itspace.companycmployeespring.entity.Company;
 import am.itspace.companycmployeespring.repository.CompanyRepository;
+import am.itspace.companycmployeespring.security.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,7 +23,6 @@ public class CompanyController {
         modelMap.addAttribute("company", companies);
         return "company";
     }
-
     @GetMapping("/company/add")
     public String addCompany() {
         return "addCompany";

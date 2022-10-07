@@ -1,4 +1,4 @@
-package am.itspace.companycmployeespring.entity.controller;
+package am.itspace.companycmployeespring.controller;
 
 import am.itspace.companycmployeespring.entity.Company;
 import am.itspace.companycmployeespring.entity.Employee;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -39,17 +38,15 @@ public class EmployeeController {
     @GetMapping("/employee")
     public String employeePage(ModelMap modelMap) {
         List<Employee> employees = employeeRepository.findAll();
-        modelMap.addAttribute("employee", employees);
+        modelMap.addAttribute("employees", employees);
         return "employees";
     }
-
     @GetMapping("/employee/add")
     public String addEmployeePage(ModelMap modelMap) {
         List<Company> companies = companyRepository.findAll();
         modelMap.addAttribute("companies", companies);
         return "addEmployee";
     }
-
     @PostMapping("/employee/add")
     public String addEmployee(@ModelAttribute Employee employee, @RequestParam("employeeImage") MultipartFile file) throws IOException {
         if (!file.isEmpty() && file.getSize() > 0) {

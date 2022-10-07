@@ -8,18 +8,12 @@
 <form action="/users/add" method="post" enctype="multipart/form-data">
     <input type="password" name="password" placeholder="please input password"/><br>
     <input type="email" name="email" placeholder="please input email"/><br>
+    <span style="color:red " th:if="${errorMassage  != null}" th:text="${errorMassage}"></span><br>
     <select name="role">
         <option value="ADMIN"> ADMIN</option>
         <option value="USER"> USER</option>
     </select><br>
-<!--    <select name="user.id">-->
-<!--        <option th:each="user: ${users}"-->
-<!--                th:text="${user.name}" th:value="${user.id}">-->
-<!--        </option>-->
-<!--    </select>-->
-    <br>
     <input type="submit" value="Add user">
-
 </form>
 </body>
 </html>

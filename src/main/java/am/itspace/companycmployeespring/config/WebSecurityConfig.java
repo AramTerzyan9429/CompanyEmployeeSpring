@@ -23,16 +23,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .formLogin()
+                .loginPage("/loginPage")
+                .loginProcessingUrl("/login")
+                .failureUrl("/loginPage?error=true")
+                .defaultSuccessUrl("/loginSuccess")
                 .and()
                 .logout()
+                .logoutSuccessUrl("/")
                 .and()
                 .authorizeRequests()
                 .antMatchers("/company/add").hasAuthority(Role.ADMIN.name())
                 .antMatchers("/company/delete").hasAuthority(Role.ADMIN.name())
-                .antMatchers("/employee/delete").hasAuthority(Role.ADMIN.name())
+                .antMatchers("/employee/add").hasAuthority(Role.ADMIN.name())
                 .antMatchers("/employee/delete").hasAuthority(Role.ADMIN.name())
                 .anyRequest()
-                .permitAll();
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/accessDenied");
+
     }
 
 

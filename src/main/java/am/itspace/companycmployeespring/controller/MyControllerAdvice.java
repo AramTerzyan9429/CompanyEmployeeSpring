@@ -1,5 +1,4 @@
-package am.itspace.companycmployeespring.entity.controller;
-
+package am.itspace.companycmployeespring.controller;
 import am.itspace.companycmployeespring.entity.User;
 import am.itspace.companycmployeespring.security.CurrentUser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,5 +16,10 @@ public class MyControllerAdvice {
         }
         return null;
     }
-
+//    //ստանում ենք էս պահի url-ը, պիտի սպլիտ անենք
+//    @ModelAttribute(name ="currentUrl" )
+//    public String currentUrl(HttpServletRequest request){
+//        return request.getRequestURI();
+//
+//    }
 }
